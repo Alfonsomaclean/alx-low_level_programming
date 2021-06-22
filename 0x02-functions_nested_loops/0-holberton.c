@@ -1,20 +1,20 @@
-#include <stdio.h>
-int _putchar(char c);
+#include "holberton.h"
+
 /**
- * main - printing Holberton string
- *
- * Return: On success 0.
- */
+* main - Print the word "Holberton"
+*
+* Return: Always 0 (Success)
+*/
+
 int main(void)
 {
-	char *string;
 	int i;
+	char p[] = "Holberton";
 
-	string = "Holberton";
-	for (i = 0; i <= 8; i++)
-	{
-		_putchar(string[i]);
-	}
-	_putchar('\n');
+	for (i = 0; i < 9; i++)
+		{
+		_putchar(p[i]);
+		}
+		_putchar('\n');
 	return (0);
 }
