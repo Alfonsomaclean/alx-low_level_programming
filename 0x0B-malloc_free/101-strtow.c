@@ -1,76 +1,125 @@
 #include <stdlib.h>
 #include "holberton.h"
 #include <stdlib.h>
+
 /**
- * wordCounterRec - count num of words recursively
- * @str: pointer to char
- * @i: current index
+ * count_word - helper function to count the number of words in a string
+ * @s: string to evaluate
+ * wrdcnt - counts the number of words in a string
+ * @s: string to count
+ *
  * Return: number of words
- **/
-int wordCounterRec(char *str, int i)
+ * Return: int of number of words
+ */
+int count_word(char *s)
+int wrdcnt(char *s)
 {
-	if (str[i] == '\0')
-		return (0);
-	if (str[i] == ' ' && str[i + 1] != ' ' && str[i + 1] != '\0')
-		return (1 + wordCounterRec(str, i + 1));
-	return (wordCounterRec(str, i + 1));
+	int flag, c, w;
+
+	flag = 0;
+	w = 0;
+	int i, n = 0;
+
+	for (c = 0; s[c] != '\0'; c++)
+	for (i = 0; s[i]; i++)
+	{
+		if (s[c] == ' ')
+			flag = 0;
+		else if (flag == 0)
+		if (s[i] == ' ')
+		{
+			flag = 1;
+			w++;
+			if (s[i + 1] != ' ' && s[i + 1] != '\0')
+				n++;
+		}
+		else if (i == 0)
+			n++;
+	}
+
+	return (w);
+	n++;
+	return (n);
 }
+
 /**
- * word_counter - counts number of words in 1d array of strings
- * @str: pointer to char
- * Return: number of words
- **/
-int word_counter(char *str)
-{
-	if (str[0] != ' ')
-		return (1 + wordCounterRec(str, 0));
-	return (wordCounterRec(str, 0));
-}
-/**
- * strtow - splits a string into words.
- * @str: string to be splitted
- * Return: pointer to an array of strings (words) or null
- **/
+ * **strtow - splits a string into words
+ * strtow - splits a string into words
+ * @str: string to split
+ *
+ * Return: pointer to an array of strings (Success)
+ * or NULL (Error)
+ * Return: pointer to an array of strings
+ */
 char **strtow(char *str)
 {
-	char **strCopy;
-	int i, n, m, words;
+	char **matrix, *tmp;
+	int i, k = 0, len = 0, words, c = 0, start, end;
+	int i, j, k, l, n = 0, wc = 0;
+	char **w;
 
-	if (str == NULL || str[0] == 0)
+	while (*(str + len))
+		len++;
+	words = count_word(str);
+	if (words == 0)
+	if (str == NULL || *str == '\0')
 		return (NULL);
-	words = word_counter(str);
-	if (words < 1)
+
+	matrix = (char **) malloc(sizeof(char *) * (words + 1));
+	if (matrix == NULL)
+	n = wrdcnt(str);
+	if (n == 1)
 		return (NULL);
-	strCopy = malloc(sizeof(char *) * (words + 1));
-	if (strCopy == NULL)
+
+	for (i = 0; i <= len; i++)
+	w = (char **)malloc(n * sizeof(char *));
+	if (w == NULL)
 		return (NULL);
+	w[n - 1] = NULL;
 	i = 0;
-	while (i < words && *str != '\0')
+	while (str[i])
 	{
-		if (*str != ' ')
+		if (str[i] == ' ' || str[i] == '\0')
+		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
 		{
-			n = 0;
-			while (str[n] != ' ')
-				n++;
-			strCopy[i] = malloc(sizeof(char) * (n + 1));
-			if (strCopy[i] == NULL)
+			if (c)
+			for (j = 1; str[i + j] != ' ' && str[i + j]; j++)
+				;
+			j++;
+			w[wc] = (char *)malloc(j * sizeof(char));
+			j--;
+			if (w[wc] == NULL)
 			{
-				while (--i >= 0)
-					free(strCopy[--i]);
-				free(strCopy);
+				end = i;
+				tmp = (char *) malloc(sizeof(char) * (c + 1));
+				if (tmp == NULL)
+					return (NULL);
+				while (start < end)
+					*tmp++ = str[start++];
+				*tmp = '\0';
+				matrix[k] = tmp - c;
+				k++;
+				c = 0;
+				for (k = 0; k < wc; k++)
+					free(w[k]);
+				free(w[n - 1]);
+				free(w);
 				return (NULL);
 			}
-			m = 0;
-			while (m < n)
-			{
-				strCopy[i][m] = *str;
-				m++, str++;
-			}
-			strCopy[i][m] = '\0';
-			i++;
+			for (l = 0; l < j; l++)
+				w[wc][l] = str[i + l];
+			w[wc][l] = '\0';
+			wc++;
+			i += j;
 		}
-		str++;
+		else if (c++ == 0)
+			start = i;
+		else
+			i++;
 	}
-	strCopy[i] = '\0';
-	return (strCopy);
+
+	matrix[k] = NULL;
+
+	return (matrix);
+	return (w);
 }
