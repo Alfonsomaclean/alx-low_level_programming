@@ -1,32 +1,69 @@
 #include "3-calc.h"
-#include <string.h>
 
 /**
- * get_op_func - parse which function to use
- * @s: character to be checked
+ * op_add - function that adds a and b
+ * @a: first integer
+ * @b: second integer
  *
- * Return: return index of integer
+ * Return: a + b
  */
 
-int (*get_op_func(char *s))(int, int)
+int op_add(int a, int b)
 {
-	op_t ops[] = {
-		{"+", op_add},
-		{"-", op_sub},
-		{"*", op_mul},
-		{"/", op_div},
-		{"%", op_mod},
-		{NULL, NULL}
-	};
-	int i = 0;
+	return (a + b);
+}
 
-	while (i < 5)
-	{
-		if ((strcmp(s, ops[i].op) == 0))
-		{
-			return (ops[i].f);
-		}
-		i++;
-	}
-	return (NULL);
+
+/**
+ * op_sub - function that subs a and b
+ * @a: first integer
+ * @b: second integer
+ *
+ * Return: a - b
+ */
+
+int op_sub(int a, int b)
+{
+	return (a - b);
+}
+
+
+/**
+ * op_mul - function that returns a * b
+ * @a: first integer
+ * @b: second integer
+ *
+ * Return: a * b
+ */
+
+int op_mul(int a, int b)
+{
+	return (a * b);
+}
+
+
+/**
+ * op_div - function that divides a and b
+ * @a: first integer
+ * @b: second integer
+ *
+ * Return: a / b
+ */
+int op_div(int a, int b)
+{
+	return (a / b);
+}
+
+
+/**
+ * op_mod - function that mods a and b
+ * @a: first integer
+ * @b: second integer
+ *
+ * Return: a % b
+ */
+
+int op_mod(int a, int b)
+{
+	return (a % b);
 }
