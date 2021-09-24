@@ -1,5 +1,6 @@
-#ifndef HOLBERTON_H
-#define HOLBERTON_H
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <stdio.h>
 #include <unistd.h>
 
@@ -23,5 +24,10 @@ char *_strchr(char *s, char c);
 unsigned int _strspn(char *s, char *accept);
 char *_strpbrk(char *s, char *accept);
 char *_strstr(char *haystack, char *needle);
+int add(int a, int b);
+int div(int a, int b);
+int mod(int a, int b);
+int mul(int a, int b);
+int sub(int a, int b);
 
 #endif
